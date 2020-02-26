@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="horizontal-line">
+  <h2>{{ thisRecipe }}<h2>
+  {{ thisRecipe.mealPic }}
+  cooking time: {{ thisRecipe.mealCookTime }}
+  calories: {{ thisRecipe.mealCalories }}
+
+<h2>Ingredients</h2>
+  {% if thisRecipe.mealIngredient1 != "" %}
+  1. {{ thisRecipe.mealIngredient1 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient2 != "" %}
+  2. {{ thisRecipe.mealIngredient2 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient3 != "" %}
+  3. {{ thisRecipe.mealIngredient3 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient4 != "" %}
+  4. {{ thisRecipe.mealIngredient4 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient5 != "" %}
+  5. {{ thisRecipe.mealIngredient5 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient6 != "" %}
+  6. {{ thisRecipe.mealIngredient6 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient7 != "" %}
+  7. {{ thisRecipe.mealIngredient7 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient8 != "" %}
+  8. {{ thisRecipe.mealIngredient8 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient9 != "" %}
+  9. {{ thisRecipe.mealIngredient9 }}
+  {% endif %}
+
+  {% if thisRecipe.mealIngredient10 != "" %}
+  10. {{ thisRecipe.mealIngredient10 }}
+  {% endif %}
+
+<h2>Directions</h2>
+  {% if thisRecipe.mealDirection1 != "" %}
+  1. {{ thisRecipe.mealDirection1 }}
+  {% endif %}
+
+  {% if thisRecipe.mealDirection2 != "" %}
+  2. {{ thisRecipe.mealDirection2 }}
+  {% endif %}
+
+  {% if thisRecipe.mealDirection3 != "" %}
+  3. {{ thisRecipe.mealDirection3 }}
+  {% endif %}
+
+  {% if thisRecipe.mealDirection4 != "" %}
+  4. {{ thisRecipe.mealDirection4 }}
+  {% endif %}
+
+  {% if thisRecipe.mealDirection5 != "" %}
+  5. {{ thisRecipe.mealDirection5 }}
+  {% endif %}
+
+<h2>User rating</h2>
+  {{ thisRecipe.mealRate }}
+</div>
+{% endblock %}
