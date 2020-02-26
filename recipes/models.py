@@ -9,7 +9,7 @@ import requests
 class Recipe(models.Model):
     # we have several models in db
     mealName = models.CharField(max_length=50, verbose_name=('Meal Name'))
-    mealPic = models.ImageField(upload_to=('images/'), max_length=100, verbose_name=('Meal Image'))
+    mealPic = models.ImageField(upload_to=('recipes/uploaded_images/'), max_length=100, verbose_name=('Meal Image'))
     mealCookTime = models.PositiveIntegerField(blank=True, verbose_name=('Cooking Time'))
     mealCalories = models.PositiveIntegerField(blank=True, verbose_name=('Calories'))
     mealIngredient1 = models.CharField(blank=True, max_length=100, verbose_name=('Ingredient #1'))
