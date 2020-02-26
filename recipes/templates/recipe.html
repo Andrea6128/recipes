@@ -2,9 +2,17 @@
 {% block content %}
 <div class="horizontal-line">
   <h2>{{ thisRecipe }}<h2>
+  <br>
+  <img src="{{ thisRecipe.mealPic.url }}" width='400' height='auto'></img>
+  <br>
   {{ thisRecipe.mealPic }}
-  cooking time: {{ thisRecipe.mealCookTime }}
-  calories: {{ thisRecipe.mealCalories }}
+
+  cooking time: {{ thisRecipe.mealCookTime }} minutes
+  {% if thisRecipe.mealCalories == "" %}
+    calories: not provided
+  {% else %}
+    calories: {{ thisRecipe.mealCalories }}
+  {% endif %}
 
 <h2>Ingredients</h2>
   {% if thisRecipe.mealIngredient1 != "" %}
