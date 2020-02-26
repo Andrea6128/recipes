@@ -5,7 +5,6 @@
   <br>
   <img src="{{ thisRecipe.mealPic.url }}" width='400' height='auto'></img>
   <br>
-  {{ thisRecipe.mealPic }}
 
   cooking time: {{ thisRecipe.mealCookTime }} minutes
   {% if thisRecipe.mealCalories == "" %}
@@ -78,5 +77,6 @@
 
 <h2>User rating</h2>
   {{ thisRecipe.mealRate }}
+
 </div>
 {% endblock %}

@@ -5,4 +5,4 @@ db.sqlite3
 .DS_Store
 heslo_admin.txt
 todo.md
-uploaded_images*
+media*
