@@ -35,7 +35,6 @@ def recipe_id_view(request, id):
     #     # return render(request, 'printers/success.html', {'viewsRoomNumber': viewsRoomNumber, 'viewsPrinterName': viewsPrinterName, 'viewsTonerColor': viewsTonerColor })
     # else:
     #     print('POST didn\'t happen')
-
     context = { 'thisRecipe': currentRecipe,
                 'thisIP': ip,
                 'lastIP': lastIP,
@@ -45,7 +44,15 @@ def recipe_id_view(request, id):
                 # 'thisWindSpeed': windSpeed,
                 # 'thisCurrentTime': currentTime,
                 # 'thisBgPic': bgPic }
+    print(context)
+
     return render(request, 'recipe.html', context)
 
 def success(request):
-    return render(request, 'success.html', {})
+    form = UserForm(request.POST)
+
+    if form.is_valid():
+        selected = form.cleaned_data.get("RADIO_CHOICES")
+        print(selected)
+
+    return render(request, 'success.html', {'selected': selected})
