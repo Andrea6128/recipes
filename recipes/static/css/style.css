@@ -4,7 +4,7 @@
 }
 
 .body {
-  background-color: #00a7d9;
+  background-color: #042131;
   color: black;
   background-image: url('/static/images/header-background.jpg');
   background-repeat: no-repeat;
@@ -90,14 +90,15 @@ h4, h5 {
 }
 
 .page-middle-box h2 {
-  text-align: center;
+  text-align: left;
 }
 
 .page-middle-box {
   width: 65%;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(0,0,0,0.2);
+  background-color: #f8f6ea;
+  /* background-color: rgba(0,0,0,0.2); */
   height: 200%;
   overflow: visible;
   padding: 10px 0 25px 25px;

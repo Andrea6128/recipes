@@ -2,18 +2,18 @@
 {% block content %}
 <div class="horizontal-line">
   <h2>{{ thisRecipe }}<h2>
-  <br>
-  <img src="{{ thisRecipe.mealPic.url }}" width='400' height='auto'></img>
+  <img src="{{ thisRecipe.mealPic.url }}" width='800' height='auto'></img>
   <br>
 
-  cooking time: {{ thisRecipe.mealCookTime }} minutes
+  Doba přípravy: {{ thisRecipe.mealCookTime }} minut
+  <br>
   {% if thisRecipe.mealCalories == "" %}
-    calories: not provided
+    Počet kalorií: not provided
   {% else %}
-    calories: {{ thisRecipe.mealCalories }}
+    Počet kalorií: {{ thisRecipe.mealCalories }}
   {% endif %}
 
-<h2>Ingredients</h2>
+<h2>Ingredience</h2>
   {% if thisRecipe.mealIngredient1 != "" %}
   1. {{ thisRecipe.mealIngredient1 }}
   {% endif %}
@@ -54,7 +54,7 @@
   10. {{ thisRecipe.mealIngredient10 }}
   {% endif %}
 
-<h2>Directions</h2>
+<h2>Postup</h2>
   {% if thisRecipe.mealDirection1 != "" %}
   1. {{ thisRecipe.mealDirection1 }}
   {% endif %}
@@ -75,8 +75,26 @@
   5. {{ thisRecipe.mealDirection5 }}
   {% endif %}
 
-<h2>User rating</h2>
+<h2>Uživatelské hodnocení</h2>
   {{ thisRecipe.mealRate }}
+  <br>
+
+  <form method="POST" action="{% url 'success_view' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Odeslat požadavek">
+  </form>
+
+
+  {% if thisIP != "" %}
+    Jeste jste nehlasovali
+
+  {% else %}
+    Už jste hlasovali!
+  {% endif %}
+
 
 </div>
+
+
 {% endblock %}
