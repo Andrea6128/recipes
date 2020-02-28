@@ -28,31 +28,23 @@ def recipe_id_view(request, id):
     lastIP = ip
 
     form = UserForm()
-
-    # if POST happened, store value
-    # if request.method == 'POST':
-    #     print('POST happened OK')
-    #     # return render(request, 'printers/success.html', {'viewsRoomNumber': viewsRoomNumber, 'viewsPrinterName': viewsPrinterName, 'viewsTonerColor': viewsTonerColor })
-    # else:
-    #     print('POST didn\'t happen')
     context = { 'thisRecipe': currentRecipe,
                 'thisIP': ip,
                 'lastIP': lastIP,
                 'thisForm': form }
-                # 'thisWeatherType': weatherType,
-                # 'thisWeatherDesc': weatherDesc,
-                # 'thisWindSpeed': windSpeed,
-                # 'thisCurrentTime': currentTime,
-                # 'thisBgPic': bgPic }
     print(context)
 
     return render(request, 'recipe.html', context)
 
-def success(request):
-    form = UserForm(request.POST)
+# success view
+def success_view(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
 
-    if form.is_valid():
-        selected = form.cleaned_data.get("RADIO_CHOICES")
-        print(selected)
-
-    return render(request, 'success.html', {'selected': selected})
+        # is_valid() needs to have required=True in every form item
+        if form.is_valid():
+            selected = form.cleaned_data.get("radio_button")
+            print("selected=", selected)
+            return render(request, 'success.html', {'selected': selected })
+    else:
+        return HttpResponse('An error occured!')

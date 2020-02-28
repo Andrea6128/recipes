@@ -78,11 +78,9 @@
 <h2>Uživatelské hodnocení</h2>
 
   <form method="POST" action="{% url 'success_view' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {{ thisForm.radio_button }}
-  {{ form.RADIO_CHOICES }}
-  <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Hlasovat">
+    {% csrf_token %}
+    {{ thisForm.radio_button }}
+    <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Hlasovat">
   </form>
 
 
