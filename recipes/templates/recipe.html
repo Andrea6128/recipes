@@ -79,7 +79,9 @@
 
   <form method="POST" action="{% url 'success_view' %}">
     {% csrf_token %}
-    {{ thisForm.radio_button }}
+    {% for radio in thisForm.radio_button %}
+      {{ radio }}
+    {% endfor %}
     <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Hlasovat">
   </form>
 
