@@ -18,6 +18,16 @@ def home_view(request):
 # single recipe view by id
 def recipe_id_view(request, id):
     currentRecipe = get_object_or_404(Recipe, id=id)
+
+    form = UserForm()
+    context = { 'thisRecipe': currentRecipe,
+                'thisForm': form }
+    print(context)
+
+    return render(request, 'recipe.html', context)
+
+# success view
+def success_view(request):
     ip_tuple = get_client_ip(request)
 
     ip = str(ip_tuple)
@@ -27,17 +37,6 @@ def recipe_id_view(request, id):
 
     lastIP = ip
 
-    form = UserForm()
-    context = { 'thisRecipe': currentRecipe,
-                'thisIP': ip,
-                'lastIP': lastIP,
-                'thisForm': form }
-    print(context)
-
-    return render(request, 'recipe.html', context)
-
-# success view
-def success_view(request):
     if request.method == "POST":
         form = UserForm(request.POST)
 
@@ -45,6 +44,15 @@ def success_view(request):
         if form.is_valid():
             selected = form.cleaned_data.get("radio_button")
             print("selected=", selected)
-            return render(request, 'success.html', {'selected': selected })
+            print("thisIP=", ip)
+            print("lastIP=", lastIP)
+
+            # todo: 1. write the number and IP to database!
+
+            # todo: 2. calculate average rating for every meal and display it on the success page
+
+            return render(request, 'success.html', {'selected': selected,
+                                                    'thisIP': ip,
+                                                    'lastIP': lastIP })
     else:
         return HttpResponse('An error occured!')
