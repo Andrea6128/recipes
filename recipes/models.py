@@ -10,8 +10,8 @@ class Recipe(models.Model):
     # we have several models in db
     mealName = models.CharField(max_length=50, verbose_name=('Meal Name'))
     mealPic = models.ImageField(upload_to=(''), max_length=100, verbose_name=('Meal Image'))
-    mealCookTime = models.PositiveIntegerField(blank=True, verbose_name=('Cooking Time'))
-    mealCalories = models.PositiveIntegerField(blank=True, verbose_name=('Calories'))
+    mealCookTime = models.PositiveIntegerField(default=1, verbose_name=('Cooking Time'))
+    mealCalories = models.PositiveIntegerField(default=1, verbose_name=('Calories'))
     mealIngredient1 = models.CharField(blank=True, max_length=100, verbose_name=('Ingredient #1'))
     mealIngredient2 = models.CharField(blank=True, max_length=100, verbose_name=('Ingredient #2'))
     mealIngredient3 = models.CharField(blank=True, max_length=100, verbose_name=('Ingredient #3'))
@@ -27,7 +27,9 @@ class Recipe(models.Model):
     mealDirection3 = models.TextField(blank=True, max_length=500, verbose_name=('Direction #3'))
     mealDirection4 = models.TextField(blank=True, max_length=500, verbose_name=('Direction #4'))
     mealDirection5 = models.TextField(blank=True, max_length=500, verbose_name=('Direction #5'))
-    mealRate = models.PositiveIntegerField(blank=True, verbose_name=('Rating'))
+
+    mealIP = models.CharField(blank=True, max_length=16, verbose_name=('user IP address'))
+    mealDbRating = models.PositiveIntegerField(default=1, verbose_name=('Meal rating'))
 
     # get recipe url by id for use in templates
     def getRecipeUrl(self):

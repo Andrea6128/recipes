@@ -21,13 +21,26 @@ def recipe_id_view(request, id):
 
     form = UserForm()
     context = { 'thisRecipe': currentRecipe,
-                'thisForm': form }
+                'thisForm': form,
+                'id': id }
     print(context)
+    print(id)
+    print(currentRecipe.mealName)
+
+    # store id number to temporary file
+    with open("recipes/data/temp.json", "w") as out:
+        data = str(id)
+        out.write(data)
 
     return render(request, 'recipe.html', context)
 
 # success view
 def success_view(request):
+    # get id from the file stored in recipe_id_view
+    with open("recipes/data/temp.json", "r") as file:
+        data_list = [id for id in next(file)]
+        id = data_list[0]
+
     ip_tuple = get_client_ip(request)
 
     ip = str(ip_tuple)
@@ -37,22 +50,24 @@ def success_view(request):
 
     lastIP = ip
 
+    # check of POST request happened and process it
     if request.method == "POST":
         form = UserForm(request.POST)
 
         # is_valid() needs to have required=True in every form item
         if form.is_valid():
             selected = form.cleaned_data.get("radio_button")
-            print("selected=", selected)
-            print("thisIP=", ip)
-            print("lastIP=", lastIP)
 
-            # todo: 1. write the number and IP to database!
+            selectedInt = int(selected)
+
+            # write current meal ID and IP address to the database
+            Recipe.objects.filter(id=id).update(mealDbRating=selectedInt) # rating
+            Recipe.objects.filter(id=id).update(mealIP=lastIP) # last visitor ip
 
             # todo: 2. calculate average rating for every meal and display it on the success page
 
             return render(request, 'success.html', {'selected': selected,
-                                                    'thisIP': ip,
-                                                    'lastIP': lastIP })
+                                                    'lastIP': lastIP,
+                                                   })
     else:
         return HttpResponse('An error occured!')
