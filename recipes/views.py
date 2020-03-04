@@ -73,11 +73,23 @@ def success_view(request):
             # data_list.append(data_dict)
             # print(data_list)
 
-            with open("recipes/data/data.json", "a+") as file:
-                json.dump(data_dict, file, indent=4, separators=(',', ': '))
-                print(file)
+            with open("recipes/data/data.json", "r") as file_read:
+                data = json.load(file_read)
+                print('data=', data)
+                print(type(data))
+
+                str_id = str(id)
+                single_dict_record = {str_id:selectedInt}
+
+                data.append(single_dict_record)
+                print("dict with item added:", data)
+
+
+            with open("recipes/data/data.json", "w") as file_write:
+                json.dump(data, file_write, indent=4, separators=(',', ': '))
 
             # todo: calculate average rating for every meal and display it on the success page
+            
 
             return render(request, 'success.html', {'selected': selected,
                                                     'lastIP': lastIP,
