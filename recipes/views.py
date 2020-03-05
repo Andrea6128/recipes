@@ -24,9 +24,6 @@ def recipe_id_view(request, id):
     context = { 'thisRecipe': currentRecipe,
                 'thisForm': form,
                 'id': id }
-    print(context)
-    print(id)
-    print(currentRecipe.mealName)
 
     # store id number to temporary file
     with open("recipes/data/temp_id.json", "w") as out:
@@ -79,21 +76,10 @@ def success_view(request):
 
                 # add new collected data to the list
                 data.append(single_dict_record)
-                print("dict with item added:", data)
 
             # write new list with data to json file and beautize it
             with open("recipes/data/data.json", "w") as file_write:
                 json.dump(data, file_write, indent=4, separators=(',', ': '))
-
-            # todo: calculate average rating for every meal and display it on the success page
-            print("data=",data)
-
-            # count all keys
-            for key in data:
-                print(key.keys())
-
-            # printing initial_dictionary
-            print("initial_dictionary", str(data))
 
             # finding duplicate values
             # from dictionary using flip
@@ -106,28 +92,23 @@ def success_view(request):
                     else:
                         flipped_dict[key].append(value)
 
-            # printing result
-            print("final_dictionary", str(flipped_dict))
-
             # for each flipped_dict item calculate the average of values
-            for key, value in flipped_dict.items():
-                print('\nkey', key)
-                for vals in flipped_dict.values():
-                    print('vals', vals)
-                    suma = sum(vals)
-                    print('suma', suma)
-                    cnt = len(vals)
-                    print('cnt', cnt)
-                    avg = suma // cnt
-                    print('avg', avg)
+            for key in flipped_dict:
+                if key == str_id:
+                    list_of_votes = flipped_dict[str_id]
+                    length_of_votes = len(list_of_votes)
+                    sum_of_votes = sum(list_of_votes)
+                    average_of_votes = sum_of_votes // length_of_votes
+                else:
+                    pass
 
-
-            # store results to new lists or dicts
-            # display values according to keys and values
+            # set the string value and send it to the template via context value
+            str_average_of_votes = str(average_of_votes)
 
             return render(request, 'success.html', {'selected': selected,
                                                     'lastIP': lastIP,
                                                     'id': id,
+                                                    'averageVotes': str_average_of_votes,
                                                    })
     else:
         return HttpResponse('An error occured!')
