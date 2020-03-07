@@ -30,6 +30,7 @@ class Recipe(models.Model):
 
     mealIP = models.CharField(blank=True, max_length=16, verbose_name=('user IP address'))
     mealDbRating = models.PositiveIntegerField(default=1, verbose_name=('Meal rating'))
+    mealAverageRating = models.PositiveIntegerField(default=1, verbose_name=('Meal average rating'))
 
     # get recipe url by id for use in templates
     def getRecipeUrl(self):

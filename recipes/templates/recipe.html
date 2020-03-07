@@ -5,15 +5,15 @@
   <img src="{{ thisRecipe.mealPic.url }}" width='800' height='auto'></img>
   <br>
 
-  Doba přípravy: {{ thisRecipe.mealCookTime }} minut
+  Cook Time: {{ thisRecipe.mealCookTime }} minut
   <br>
   {% if thisRecipe.mealCalories == "" %}
-    Počet kalorií: not provided
+    Calories: not provided
   {% else %}
-    Počet kalorií: {{ thisRecipe.mealCalories }}
+    Calories: {{ thisRecipe.mealCalories }}
   {% endif %}
 
-<h2>Ingredience</h2>
+<h2>Ingrediences</h2>
   {% if thisRecipe.mealIngredient1 != "" %}
   1. {{ thisRecipe.mealIngredient1 }}
   {% endif %}
@@ -54,7 +54,7 @@
   10. {{ thisRecipe.mealIngredient10 }}
   {% endif %}
 
-<h2>Postup</h2>
+<h2>Procedure</h2>
   {% if thisRecipe.mealDirection1 != "" %}
   1. {{ thisRecipe.mealDirection1 }}
   {% endif %}
@@ -75,17 +75,15 @@
   5. {{ thisRecipe.mealDirection5 }}
   {% endif %}
 
-<h2>Uživatelské hodnocení</h2>
+<h2>User Rating</h2>
 
   <form method="POST" action="{% url 'success_view' %}">
     {% csrf_token %}
     {% for radio in thisForm.radio_button %}
       {{ radio }}
     {% endfor %}
-    <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Hlasovat">
+    <input type="submit" name="submit-btn" class="save btn btn-default btn-lg btn-primary" value="Rate">
   </form>
 
 </div>
-
-
 {% endblock %}

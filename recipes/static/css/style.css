@@ -90,7 +90,7 @@ h4, h5 {
 }
 
 .page-middle-box h2 {
-  text-align: left;
+  text-align: center;
 }
 
 .page-middle-box {
@@ -127,4 +127,8 @@ footer a {
 
 .background-pic {
   padding-bottom: 50px;
+}
+
+.chart {
+  text-align: center;
 }

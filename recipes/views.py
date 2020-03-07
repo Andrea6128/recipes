@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
-from .models import Recipe
-from datetime import datetime
-import requests
-from ipware import get_client_ip
+from django.db import connection
 from django.http import HttpResponse
+from datetime import datetime
+from ipware import get_client_ip
 from .forms import UserForm
+from .models import Recipe
+from .fusioncharts import FusionCharts
+from collections import OrderedDict
+import requests
 import json
+
 
 # Create your views here.
 
@@ -15,6 +19,7 @@ def home_view(request):
     queryset = Recipe.objects.all()
     context = { 'recipes': queryset }
     return render(request, 'home_view.html', context)
+
 
 # single recipe view by id
 def recipe_id_view(request, id):
@@ -32,7 +37,8 @@ def recipe_id_view(request, id):
 
     return render(request, 'recipe.html', context)
 
-# success view
+
+# success view (with charts)
 def success_view(request):
     # get id from json file stored in recipe_id_view
     with open("recipes/data/temp_id.json", "r") as file:
@@ -64,6 +70,11 @@ def success_view(request):
             # create a json file and append collected data to it
             data_dict = {}
             data_dict[id]=selectedInt
+
+            try:
+                file = open("recipes/data/data.json")
+            except FileNotFoundError:
+                file = open("recipes/data/data.json", "a").close()
 
             # read the old json file, store it to list
             with open("recipes/data/data.json", "r") as file_read:
@@ -102,13 +113,73 @@ def success_view(request):
                 else:
                     pass
 
+            # update database mealAverageRating field
+            Recipe.objects.filter(id=id).update(mealAverageRating=average_of_votes)
+
             # set the string value and send it to the template via context value
             str_average_of_votes = str(average_of_votes)
+
+            # Chart data
+            # Chart data is passed to the `dataSource` parameter, as dictionary in the form of key-value pairs.
+            dataSource = OrderedDict()
+
+            # The `chartConfig` dict contains key-value pairs data for chart attribute
+            chartConfig = OrderedDict()
+            chartConfig["caption"] = "Average Recipe Rating Table"
+            chartConfig["subCaption"] = "(rated from 1 to 10 points)"
+            chartConfig["xAxisName"] = "Recipe"
+            chartConfig["yAxisName"] = "Average Rating"
+            chartConfig["numberSuffix"] = " points"
+            chartConfig["theme"] = "fusion"
+
+            # The `chartData` dict contains key-value pairs data
+            chartData = OrderedDict()
+
+            # get names
+            names_list = []
+            for name in Recipe.objects.all():
+                str_name = str(name)
+                names_list.append(str_name)
+
+            # get ratings
+            rating_list = []
+            for rating in Recipe.objects.all().values_list('mealAverageRating'):
+                str_rating = str(rating)
+
+                removed_chars = ["(", ",", ")"]
+                for char in removed_chars:
+                    str_rating = str_rating.replace(char, "")
+
+                int_rating = int(str_rating)
+                rating_list.append(int_rating)
+
+            # import names + ratings to chart
+            chartData = dict(zip(names_list, rating_list))
+
+            dataSource["chart"] = chartConfig
+            dataSource["data"] = []
+
+            # Convert the data in the `chartData` array into a format that can be consumed by FusionCharts.
+            # The data for the chart should be in an array wherein each element of the array is a JSON object
+            # having the `label` and `value` as keys.
+
+            # Iterate through the data in `chartData` and insert in to the `dataSource['data']` list.
+            for key, value in chartData.items():
+                data = {}
+                data["label"] = key
+                data["value"] = value
+                dataSource["data"].append(data)
+
+            # Create an object for the column 2D chart using the FusionCharts class constructor
+            # The chart data is passed to the `dataSource` parameter.
+            column2D = FusionCharts("column2d", "ex1" , "90%", "400", "chart-1", "json", dataSource)
+
 
             return render(request, 'success.html', {'selected': selected,
                                                     'lastIP': lastIP,
                                                     'id': id,
                                                     'averageVotes': str_average_of_votes,
+                                                    'chartOutput' : column2D.render(),
                                                    })
     else:
         return HttpResponse('An error occured!')
