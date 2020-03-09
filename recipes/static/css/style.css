@@ -106,11 +106,14 @@ h4, h5 {
   /* background-color: rgba(0,0,0,0.2); */
   height: 200%;
   overflow: visible;
-  padding: 10px 0 25px 25px;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 
 .text {
   text-align: left;
+  padding-left: 50px;
+  padding-right: 50%;
 }
 
 .meal-list h2 {
@@ -128,13 +131,13 @@ footer {
   overflow: visible;
   background-color: #0f0f0f;
   color: #606060;
-  padding: 25px 0 22px 25px;
+  padding-top: 25px;
+  padding-bottom: 22px;
 }
 
 footer p {
   font-size: 14px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 0 6px 25px;
 }
 
 footer a {
