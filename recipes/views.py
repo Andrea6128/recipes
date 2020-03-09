@@ -174,7 +174,6 @@ def success_view(request):
             # The chart data is passed to the `dataSource` parameter.
             column2D = FusionCharts("column2d", "ex1" , "90%", "400", "chart-1", "json", dataSource)
 
-
             return render(request, 'success.html', {'selected': selected,
                                                     'lastIP': lastIP,
                                                     'id': id,

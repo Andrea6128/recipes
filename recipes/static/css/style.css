@@ -66,7 +66,7 @@ h4, h5 {
 }
 
 .horizontal-line hr {
-  margin: 15px 0 15px 25%;
+  margin: 20px 0 15px 25%;
   align-items: center;
   width: 50%;
 }
@@ -101,7 +101,7 @@ h4, h5 {
 
 .page-middle-box h2 {
   text-align: left;
-  margin-top: 22px;
+  margin-top: 0px;
 }
 
 .page-middle-box {
@@ -114,12 +114,6 @@ h4, h5 {
   overflow: visible;
   padding-top: 10px;
   padding-bottom: 25px;
-}
-
-.text {
-  text-align: left;
-  padding-left: 50px;
-  padding-right: 50%;
 }
 
 .meal-list h2 {
@@ -159,6 +153,50 @@ footer a {
   text-align: center;
 }
 
-.meal-image {
-  text-align: center;
+.text {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  padding-left: 50px;
+  width: 45%;
+  float: left;
+  margin: auto;
+}
+
+img {
+  border-radius: 2%;
+}
+
+#meal-image {
+  text-align: left;
+  width: 45%;
+  float: right;
+}
+
+#box-1 {
+  padding: 10px 10px 10px 10px;
+  background-color: #ddd5c0;
+  border-radius: 15px;
+}
+
+#box-2 {
+  padding: 10px 10px 10px 10px;
+  background-color: #eae1a1;
+  border-radius: 15px;
+}
+
+#box-3 {
+  padding: 10px 10px 10px 10px;
+  background-color: #f4ddc5;
+  border-radius: 15px;
+}
+
+#box-4 {
+  padding: 10px 10px 10px 10px;
+  background-color: #f3cfaf;
+  border-radius: 15px;
+}
+
+#clear {
+    clear: both;
 }
