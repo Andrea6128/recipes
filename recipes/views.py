@@ -130,7 +130,7 @@ def success_view(request):
             chartConfig["xAxisName"] = "Recipe"
             chartConfig["yAxisName"] = "Average Rating"
             chartConfig["numberSuffix"] = " points"
-            chartConfig["theme"] = "fusion"
+            chartConfig["theme"] = "candy"
 
             # The `chartData` dict contains key-value pairs data
             chartData = OrderedDict()
