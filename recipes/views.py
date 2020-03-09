@@ -42,7 +42,7 @@ def recipe_id_view(request, id):
 def success_view(request):
     # get id from json file stored in recipe_id_view
     with open("recipes/data/temp_id.json", "r") as file:
-        data_list = [id for id in next(file)]
+        data_list = [id for id in file]
         id = data_list[0]
 
     # crop the IP address
