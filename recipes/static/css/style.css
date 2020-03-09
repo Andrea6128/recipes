@@ -9,7 +9,7 @@
   background-image: url('/static/images/header-background.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
-  font-family: 'Cataraman', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 1.2rem;
 }
 
@@ -28,34 +28,39 @@
 
 h1 {
   color: #000;
-  font-family: 'Cabin', cursive;
+  font-family: 'Gabriela', cursive;
   font-size: 70px;
 }
 
 h2 {
-  color: #000;
-  font-family: 'Ropa sans', sans-serif;
-  font-size: 56px;
+  color: #666;
+  font-family: 'Gabriela', sans-serif;
+  font-size: 36px;
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 h3 {
-  font-family: 'Ropa sans', sans-serif;
-  font-size: 150%;
+  font-family: 'Gabriela', sans-serif;
+  font-size: 80px;
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
 h4, h5 {
   color: #000;
-  font-family: 'Catamaran', sans-serif;
+  font-family: 'Nunito', sans-serif;
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
+.horizontal-line {
+  text-align: center;
+}
+
 .horizontal-line hr {
-  margin-left: 25%;
+  margin: 15px 0 15px 25%;
   align-items: center;
   width: 50%;
 }
@@ -85,12 +90,12 @@ h4, h5 {
 
 .page-main h3 {
   text-align: center;
-  font-size: 1.2em;
   margin-top: 16px;
 }
 
 .page-middle-box h2 {
-  text-align: center;
+  text-align: left;
+  margin-top: 22px;
 }
 
 .page-middle-box {
@@ -102,6 +107,18 @@ h4, h5 {
   height: 200%;
   overflow: visible;
   padding: 10px 0 25px 25px;
+}
+
+.text {
+  text-align: left;
+}
+
+.meal-list h2 {
+  text-align: center;
+}
+
+.success h2 {
+  text-align: center;
 }
 
 footer {
@@ -130,5 +147,9 @@ footer a {
 }
 
 .chart {
+  text-align: center;
+}
+
+.meal-image {
   text-align: center;
 }

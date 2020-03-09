@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="horizontal-line">
-  <h2>Thank you for voting!</h2>
-  <h3>Your rating for this recipe is {{ selected }}/10 points</h3>
-  <h3>Average rating for this recipe is {{ averageVotes }}/10 points</h3>
-  <h3>Your IP is {{ lastIP }}</h3>
+  <div class="success">
+    <h2>Thank you for voting!</h2>
+  </div>
+  <hr>
+  Your rating for this recipe is {{ selected }}/10 points<br>
+  Average rating for this recipe is {{ averageVotes }}/10 points<br>
+  Your IP is {{ lastIP }}
+  <hr>
 </div>
   <div id="chart-1" class="chart">{{ chartOutput|safe }}</div>
 {% endblock %}
