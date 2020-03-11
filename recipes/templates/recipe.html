@@ -5,18 +5,18 @@
 
   <div class="text">
     <div id="box-1">
-      Cook Time: {{ thisRecipe.mealCookTime }} minutes
-      <br>
+      <h2><img src="/static/images/time.png" width="32px" align="bottom"> Time & Calories</h2>
+      {{ thisRecipe.mealCookTime }} minutes /
       {% if thisRecipe.mealCalories == "" %}
-        Calories: not provided
+        not provided
       {% else %}
-        Calories: {{ thisRecipe.mealCalories }} kcal
+        {{ thisRecipe.mealCalories }} kcal
       {% endif %}
     </div>
     <br>
 
     <div id="box-2">
-    <h2>Ingredients</h2>
+    <h2><img src="/static/images/ingredients.png" width="32px" align="bottom"> Ingredients</h2>
     {% if thisRecipe.mealIngredient1 != "" %}
     <strong>1.</strong> {{ thisRecipe.mealIngredient1 }}
     <br>
@@ -70,7 +70,7 @@
     <br>
 
     <div id="box-3">
-    <h2>Procedure</h2>
+    <h2><img src="/static/images/procedure.png" width="32px" align="bottom"> Procedure</h2>
     {% if thisRecipe.mealDirection1 != "" %}
     <strong>1.</strong> {{ thisRecipe.mealDirection1 }}
     <br><br>
@@ -99,7 +99,7 @@
     <br>
 
     <div id="box-4">
-      <h2>Your Rating</h2>
+      <h2><img src="/static/images/rating.png" width="32px" align="bottom"> Your Rating</h2>
 
       <form method="POST" action="{% url 'success_view' %}">
         {% csrf_token %}
