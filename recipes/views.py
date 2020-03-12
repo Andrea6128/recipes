@@ -49,7 +49,12 @@ def success_view(request):
     ip_tuple = get_client_ip(request)
 
     ip = str(ip_tuple)
-    removed_chars = ["'", "(", ")", ",", "False", " "]
+    # check if there's True or False word in the IP string
+    if "True" in ip:
+        removed_chars = ["'", "(", ")", ",", "True", " "]
+    else:
+        removed_chars = ["'", "(", ")", ",", "False", " "]
+
     for char in removed_chars:
         ip = ip.replace(char, "")
     lastIP = ip
