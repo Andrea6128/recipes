@@ -151,6 +151,43 @@ h4, h5 {
   text-align: center;
 }
 
+.search-results h2 {
+  text-align: center;
+}
+
+.search-button {
+  margin-top: 20px;
+}
+
+.search-button button[type=submit] {
+  background-color: #b00000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  transition-duration: 0.3s;
+}
+
+.search-button button[type=submit]:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.search-button input[name='query'] {
+  font-size: 20px;
+  border-radius: 6px;
+  color: black;
+  background-color: #fff;
+  padding: 6px;
+  border: solid;
+  border-width: 1px;
+  border-color: #5d5644;
+}
+
 footer {
   width: 65%;
   margin-left: auto;
@@ -197,6 +234,7 @@ footer a {
   background-color: #fff;
   color: black;
 }
+
 .text {
   display: inline-block;
   vertical-align: top;

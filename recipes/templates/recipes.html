@@ -1,7 +1,6 @@
-<br>
 {% for recipe in recipes %}
+  <hr>
   <h2>
     <a href="{{ recipe.getRecipeUrl }}">{{ recipe.mealName }}</a>
   </h2>
-  <hr>
 {% endfor %}

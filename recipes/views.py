@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from django.db import connection
+from django.db.models import Q
 from django.http import HttpResponse
 from datetime import datetime
 from ipware import get_client_ip
@@ -36,6 +37,14 @@ def recipe_id_view(request, id):
         out.write(data)
 
     return render(request, 'recipe.html', context)
+
+
+# search field view (visible on default home view)
+def recipe_search_view(request):
+    searchButtonData = request.GET.get('query')
+    searchResult = Recipe.objects.filter(Q(mealName__icontains=searchButtonData))
+    context = { 'foundRecipes': searchResult }
+    return render(request, 'recipes_found.html', context)
 
 
 # success view (with charts)

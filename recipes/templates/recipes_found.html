@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="horizontal-line">
+  <div class="success">
+    <div id="thanks-h2">
+      <h2>Found recipes:</h2>
+    </div>
+    <hr>
+    {% for recipe in foundRecipes %}
+      <h2>
+        <a href="{{ recipe.getRecipeUrl }}">{{ recipe.mealName }}</a>
+      </h2>
+      <hr>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
