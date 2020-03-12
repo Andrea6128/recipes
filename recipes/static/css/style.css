@@ -96,6 +96,7 @@ h4, h5 {
 .page-main a {
   text-decoration: none;
   color: #5d5644;
+  transition: 0.4s;
 }
 
 .page-main a:visited a:link {
@@ -105,6 +106,7 @@ h4, h5 {
 
 .page-main a:hover {
   color: #938b78;
+  transition: 0.4s;
 }
 
 .page-main p {
