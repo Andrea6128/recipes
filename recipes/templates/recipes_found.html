@@ -6,15 +6,16 @@
       <h2>You've searched for '{{ searchButtonData }}', I found these results:</h2>
     </div>
     <hr>
-    {% if not foundRecipes %}
-      Sorry, nothing found :(
+    {% if searchButtonData %}
+      {% for recipe in foundRecipes %}
+        <h2>
+          <a href="{{ recipe.getRecipeUrl }}">{{ recipe.mealName }}</a>
+        </h2>
+        <hr>
+      {% endfor %}
+    {% elif not searchButtonData %}
+      No input data entered!
     {% endif %}
-    {% for recipe in foundRecipes %}
-      <h2>
-        <a href="{{ recipe.getRecipeUrl }}">{{ recipe.mealName }}</a>
-      </h2>
-      <hr>
-    {% endfor %}
   </div>
 </div>
 {% endblock %}
