@@ -43,7 +43,8 @@ def recipe_id_view(request, id):
 def recipe_search_view(request):
     searchButtonData = request.GET.get('query')
     searchResult = Recipe.objects.filter(Q(mealName__icontains=searchButtonData))
-    context = { 'foundRecipes': searchResult }
+    context = { 'foundRecipes': searchResult,
+                'searchButtonData': searchButtonData }
     return render(request, 'recipes_found.html', context)
 
 

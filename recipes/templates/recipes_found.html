@@ -3,9 +3,12 @@
 <div class="horizontal-line">
   <div class="success">
     <div id="thanks-h2">
-      <h2>Found recipes:</h2>
+      <h2>You've searched for '{{ searchButtonData }}', I found these results:</h2>
     </div>
     <hr>
+    {% if not foundRecipes %}
+      Sorry, nothing found :(
+    {% endif %}
     {% for recipe in foundRecipes %}
       <h2>
         <a href="{{ recipe.getRecipeUrl }}">{{ recipe.mealName }}</a>
