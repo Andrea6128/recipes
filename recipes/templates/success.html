@@ -15,8 +15,11 @@
   </div>
   {% endif %}
   <hr>
-  Last rating for this recipe is {{ selected }}/10 points<br>
-  Average rating for this recipe is {{ averageVotes }}/10 points<br>
+  {% if ipMatch == True %}
+  {% else %}
+    Last rating for this recipe is {{ selected }}/10 points<br>
+    Average rating for this recipe is {{ averageVotes }}/10 points<br>
+  {% endif %}
   Your IP is {{ lastIP }}
   <hr>
 </div>

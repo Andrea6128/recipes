@@ -226,6 +226,7 @@ def success_view(request):
                                        'ipMatch': ipMatch,
                                        })
             else:
+                str_average_of_votes = "0"
                 return render(request, 'success.html', {'selected': selected,
                                        'lastIP': lastIP,
                                        'id': id,
