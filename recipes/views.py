@@ -14,13 +14,11 @@ import json
 
 
 # Create your views here.
-
 # homepage view with list of cities and links to them
 def home_view(request):
     queryset = Recipe.objects.all()
     context = { 'recipes': queryset }
     return render(request, 'home_view.html', context)
-
 
 # single recipe view by id
 def recipe_id_view(request, id):
@@ -38,15 +36,15 @@ def recipe_id_view(request, id):
 
     return render(request, 'recipe.html', context)
 
-
 # search field view (visible on default home view)
 def recipe_search_view(request):
     searchButtonData = request.GET.get('query')
     searchResult = Recipe.objects.filter(Q(mealName__icontains=searchButtonData))
+    searchResult_str = str(searchResult)
     context = { 'foundRecipes': searchResult,
+                'foundRecipes_str': searchResult_str,
                 'searchButtonData': searchButtonData }
     return render(request, 'recipes_found.html', context)
-
 
 # success view (with charts)
 def success_view(request):
@@ -107,7 +105,7 @@ def success_view(request):
             selected = form.cleaned_data.get("radio_button")
             selectedInt = int(selected)
 
-            # write current meal ID and IP address to the database
+            # write current meal ID to the database
             Recipe.objects.filter(id=id).update(mealDbRating=selectedInt) # rating
 
             # create a json file and append collected data to it
@@ -217,6 +215,7 @@ def success_view(request):
             # The chart data is passed to the `dataSource` parameter.
             column2D = FusionCharts("column2d", "ex1" , "90%", "400", "chart-1", "json", dataSource)
 
+            # if IPs are same, rate with "0"
             if ipMatch == False:
                 return render(request, 'success.html', {'selected': selected,
                                        'lastIP': lastIP,
