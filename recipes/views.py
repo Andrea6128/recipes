@@ -67,7 +67,36 @@ def success_view(request):
 
     for char in removed_chars:
         ip = ip.replace(char, "")
+
+    get_db_ip = Recipe.objects.filter(id=id).values('mealIP')
+    print(str(get_db_ip.query))
+    print(get_db_ip)
+
+    # crop the IP taken from db
+    db_ip = str(get_db_ip)
+    # check if there's True or False word in the IP string taken from db
+    if "True" in db_ip:
+        removed_chars = ["'", "(", ")", ",", "True", " ", "<", ">", "[", "]", "{", "}", ":", "QuerySet", "mealIP"]
+    else:
+        removed_chars = ["'", "(", ")", ",", "False", " ", "<", ">", "[", "]", "{", "}", ":", "QuerySet", "mealIP"]
+
+    for char in removed_chars:
+        db_ip = db_ip.replace(char, "")
+
+    print("db_ip", db_ip)
+
+    ipMatch = False
+
+    # compare current IP and db IP
+    if ip == db_ip:
+        print("ip and db_ip are equal!")
+        print("this vote is invalid.")
+        print("-" * 20)
+
+        ipMatch = True
+
     lastIP = ip
+    Recipe.objects.filter(id=id).update(mealIP=lastIP) # write current IP to db
 
     # check of POST request happened and process it
     if request.method == "POST":
@@ -80,7 +109,6 @@ def success_view(request):
 
             # write current meal ID and IP address to the database
             Recipe.objects.filter(id=id).update(mealDbRating=selectedInt) # rating
-            Recipe.objects.filter(id=id).update(mealIP=lastIP) # last visitor ip
 
             # create a json file and append collected data to it
             data_dict = {}
@@ -189,11 +217,25 @@ def success_view(request):
             # The chart data is passed to the `dataSource` parameter.
             column2D = FusionCharts("column2d", "ex1" , "90%", "400", "chart-1", "json", dataSource)
 
-            return render(request, 'success.html', {'selected': selected,
-                                                    'lastIP': lastIP,
-                                                    'id': id,
-                                                    'averageVotes': str_average_of_votes,
-                                                    'chartOutput' : column2D.render(),
-                                                   })
+            if ipMatch == False:
+                return render(request, 'success.html', {'selected': selected,
+                                       'lastIP': lastIP,
+                                       'id': id,
+                                       'averageVotes': str_average_of_votes,
+                                       'chartOutput' : column2D.render(),
+                                       'ipMatch': ipMatch,
+                                       })
+            else:
+                return render(request, 'success.html', {'selected': selected,
+                                       'lastIP': lastIP,
+                                       'id': id,
+                                       'averageVotes': str_average_of_votes,
+                                       'chartOutput' : column2D.render(),
+                                       'ipMatch': ipMatch,
+                                       })
+
+        else:
+            return HttpResponse('Form is not valid')
+
     else:
-        return HttpResponse('An error occured!')
+        return HttpResponse('Bad HTTP request')

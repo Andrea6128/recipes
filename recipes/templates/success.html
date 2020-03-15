@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="horizontal-line">
+  {% if ipMatch == True %}
+    <div class="success">
+      <div id="thanks-h2">
+        <h2>You can't repeatedly rate the recipe from the same IP!</h2>
+      </div>
+    </div>
+  {% else %}
   <div class="success">
     <div id="thanks-h2">
       <h2>Thank you for voting!</h2>
     </div>
   </div>
+  {% endif %}
   <hr>
-  Your rating for this recipe is {{ selected }}/10 points<br>
+  Last rating for this recipe is {{ selected }}/10 points<br>
   Average rating for this recipe is {{ averageVotes }}/10 points<br>
   Your IP is {{ lastIP }}
   <hr>
